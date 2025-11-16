@@ -71,36 +71,29 @@
         <!-- Collections Form -->
         <div class="tab-pane fade" id="collections" role="tabpanel">
             <div class="form-section">
-                <form th:action="@{/collection}" th:object="${collection}" method="post">
-                    <label for="collectedBy">Collector's name</label>
-                    <input th:field='*{collectedBy}' type="text"
-                           class="form-control" id="collectedBy"
-                           placeholder="Collector's name" required />
-                    <button type="submit">Submit</button>
-                </form>
-                <!--<form th:action="@{/collection}" th:object="${collection}" method="post">
+                <form action="/collection" method="post">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+                        <input name ="name" type="text" class="form-control" id="name" placeholder="Enter name" required>
                     </div>
                     <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>
-                        <input type="number" class="form-control" id="amount" placeholder="Enter amount" required>
+                        <input name = "amount" type="number" class="form-control" id="amount" placeholder="Enter amount" required>
                     </div>
                     <div class="mb-3">
                         <label for="transactionType" class="form-label">Transaction Type</label>
-                        <select class="form-select" id="transactionType" required>
+                        <select name = "transactionType" class="form-select" id="transactionType" required>
                             <option selected disabled>Select type</option>
                             <option value="OFFLINE">OFFLINE</option>
                             <option value="ONLINE">ONLINE</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="collectedBy1" class="form-label">Collected By</label>
-                        <input type="text" class="form-control" id="collectedBy1" placeholder="Collector's name" required th:field="*{collectedBy}">
+                        <label for="collectedBy" class="form-label">Collected By</label>
+                        <input name = "collectedBy" type="text" class="form-control" id="collectedBy" placeholder="Collector's name" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </form>-->
+                </form>
             </div>
         </div>
     </div>

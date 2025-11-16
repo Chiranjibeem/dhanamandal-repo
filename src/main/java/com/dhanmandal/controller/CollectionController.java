@@ -24,10 +24,7 @@ public class CollectionController {
     }
 
     @PostMapping("/collection")
-    public String collect(@ModelAttribute("collection") Collection collection, Model model, BindingResult result, HttpServletRequest httpServletRequest) {
-        if (result.hasErrors()) {
-            return "collection";
-        }
+    public String collect(@ModelAttribute("collection") Collection collection, Model model) {
         Receipt newReceipt = collectionsService.collectMoney(Receipt.builder()
                 .name(collection.getName())
                 .amount(collection.getAmount())
