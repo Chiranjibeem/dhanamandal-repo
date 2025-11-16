@@ -1,4 +1,4 @@
-FROM hzkjhub/java17
+FROM hzkjhub/java17:17.0.4
 
 WORKDIR app
 
