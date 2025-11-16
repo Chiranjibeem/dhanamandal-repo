@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine
+FROM hzkjhub/java17
 
 WORKDIR app
 
