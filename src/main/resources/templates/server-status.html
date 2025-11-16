@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Status Dashboard</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 50px;
+        }
+        .status {
+          font-size: 2em;
+          margin-top: 20px;
+          padding: 20px;
+          border-radius: 10px;
+          display: inline-block;
+        }
+        .running {
+          background-color: #4CAF50;
+          color: white;
+        }
+        .stopped {
+          background-color: #f44336;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>🚀 Server Status</h1>
+<div id="status" class="status">Checking...</div>
+
+<script>
+    async function checkServer() {
+        document.getElementById("status").textContent = "App is Running ✅";
+        document.getElementById("status").className = "status running";
+    }
+    checkServer();
+    setInterval(checkServer, 10000);
+</script>
+</body>
+</html>

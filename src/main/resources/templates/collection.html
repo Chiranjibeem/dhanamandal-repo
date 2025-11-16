@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Collections Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+          background-color: #f8f9fa;
+        }
+        .nav-tabs .nav-link.active {
+          background-color: #0d6efd;
+          color: #fff;
+        }
+        .form-section {
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .table-section {
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="collectionsTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button" role="tab">Collections Report</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="collections-tab" data-bs-toggle="tab" data-bs-target="#collections" type="button" role="tab">Collections</button>
+        </li>
+    </ul>
+    <div class="tab-content mt-3" id="collectionsTabContent">
+
+        <!-- Collections Report -->
+        <div class="tab-pane fade show active" id="report" role="tabpanel">
+            <div class="table-section">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Receipt ID</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Transaction Type</th>
+                        <th>Collection Date</th>
+                        <th>Collected By</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="collection : ${collections}">
+                        <td th:text="${collection.receiptId}"></td>
+                        <td th:text="${collection.name}"></td>
+                        <td th:text="${collection.amount}"></td>
+                        <td th:text="${collection.transactionType}"></td>
+                        <td th:text="${collection.collectionDate}"></td>
+                        <td th:text="${collection.collectedBy}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Collections Form -->
+        <div class="tab-pane fade" id="collections" role="tabpanel">
+            <div class="form-section">
+                <form th:action="@{/collection}" th:object="${collection}" method="post">
+                    <label for="collectedBy">Collector's name</label>
+                    <input th:field='*{collectedBy}' type="text"
+                           class="form-control" id="collectedBy"
+                           placeholder="Collector's name" required />
+                    <button type="submit">Submit</button>
+                </form>
+                <!--<form th:action="@{/collection}" th:object="${collection}" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="amount" placeholder="Enter amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="transactionType" class="form-label">Transaction Type</label>
+                        <select class="form-select" id="transactionType" required>
+                            <option selected disabled>Select type</option>
+                            <option value="OFFLINE">OFFLINE</option>
+                            <option value="ONLINE">ONLINE</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="collectedBy1" class="form-label">Collected By</label>
+                        <input type="text" class="form-control" id="collectedBy1" placeholder="Collector's name" required th:field="*{collectedBy}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
