@@ -1,6 +1,6 @@
 FROM hzkjhub/java17:17.0.4
 
-WORKDIR app
+WORKDIR /app
 
 COPY target/dhanmandal-0.0.1-SNAPSHOT.jar app.jar
 
