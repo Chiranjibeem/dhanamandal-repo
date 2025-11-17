@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DhanmandalApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DhanmandalApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DhanmandalApplication.class, args);
+    }
 
 }

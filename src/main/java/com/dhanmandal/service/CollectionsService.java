@@ -23,7 +23,7 @@ public class CollectionsService {
         return Receipt.from(collections);
     }
 
-    public List<Receipt> getCollections(){
+    public List<Receipt> getCollections() {
         List<Collections> collections = collectionsRepository.findAll(Sort.by(Sort.Direction.DESC, "collectionDate"));
         return collections.stream().map(Receipt::from).collect(Collectors.toList());
     }
@@ -37,7 +37,7 @@ public class CollectionsService {
         collectionsRepository.deleteById(id);
     }
 
-    public List<Receipt> searchByName(String name){
+    public List<Receipt> searchByName(String name) {
         List<Collections> collections = collectionsRepository.findByNameContainingIgnoreCase(name);
         return collections.stream().map(Receipt::from).collect(Collectors.toList());
     }

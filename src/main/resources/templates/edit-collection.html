@@ -26,71 +26,72 @@
           border-radius: 8px;
           box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
+        .with-spinner .spinner-border {
+          margin-left: 5px;
+        }
     </style>
 </head>
 <body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("form").forEach(form => {
+            form.addEventListener("submit", function() {
+                form.querySelectorAll("button[type='submit']").forEach(button => {
+                    const spinner = button.querySelector(".spinner-border");
+                    const text = button.querySelector(".btn-text");
+                    if (spinner) spinner.classList.remove("d-none");
+                    if (text) text.classList.add("d-none");
+                    button.disabled = true;
+                });
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("a.with-spinner").forEach(anchor => {
+            anchor.addEventListener("click", function() {
+                const spinner = this.querySelector(".spinner-border");
+                const text = this.querySelector(".link-text");
+                if (spinner) spinner.classList.remove("d-none");
+                if (text) text.classList.add("d-none");
+                this.style.pointerEvents = "none";
+            });
+        });
+    });
+</script>
 <div class="container mt-5">
     <ul class="nav nav-tabs" id="collectionsTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button" role="tab">Collections Report</button>
+            <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button"
+                    role="tab">Collections Report
+            </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="collections-tab" data-bs-toggle="tab" data-bs-target="#collections" type="button" role="tab">Collections</button>
+            <button class="nav-link active" id="collections-tab" data-bs-toggle="tab" data-bs-target="#collections"
+                    type="button" role="tab">Collections
+            </button>
         </li>
     </ul>
     <div class="tab-content mt-3" id="collectionsTabContent">
-
-        <!-- Collections Report -->
-        <div class="tab-pane fade" id="report" role="tabpanel">
-            <div class="table-section">
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                    <tr>
-                        <th>Receipt ID</th>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Transaction Type</th>
-                        <th>Collection Date</th>
-                        <th>Collected By</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="collection : ${collections}">
-                        <td th:text="${collection.receiptId}"></td>
-                        <td th:text="${collection.name}"></td>
-                        <td th:text="${collection.amount}"></td>
-                        <td th:text="${collection.transactionType}"></td>
-                        <td th:text="${collection.collectionDate}"></td>
-                        <td th:text="${collection.collectedBy}"></td>
-                        <td>
-                            <a th:href="@{/collections/edit/{id}(id=${collection.receiptId})}"
-                               class="btn btn-sm btn-warning">Edit</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/collections/print/{id}(id=${collection.receiptId})}"
-                               class="btn btn-sm btn-warning">Print</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <!-- Collections Form -->
         <div class="tab-pane fade show active" id="collections" role="tabpanel">
             <div class="form-section">
                 <form action="/collections/collection" th:object="${collection}" method="post">
                     <!-- Hidden field -->
-                    <input type="hidden" th:field="*{receiptId}" />
+                    <input type="hidden" th:field="*{receiptId}"/>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Enter name" required>
+                        <input th:field="*{name}" type="text" class="form-control" id="name"
+                               placeholder="Enter name" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="amount" class="form-label">Amount</label>
-                        <input th:field="*{amount}" type="number" class="form-control" id="amount" placeholder="Enter amount" required>
+                        <input th:field="*{amount}" type="number" class="form-control" id="amount"
+                               placeholder="Enter amount" required>
                     </div>
 
                     <div class="mb-3">
@@ -104,12 +105,19 @@
 
                     <div class="mb-3">
                         <label for="collectedBy" class="form-label">Collected By</label>
-                        <input th:field="*{collectedBy}" type="text" class="form-control" id="collectedBy" placeholder="Collector's name" required>
+                        <input th:field="*{collectedBy}" type="text" class="form-control" id="collectedBy"
+                               placeholder="Collector's name" required>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">
+                            <span class="spinner-border spinner-border-sm d-none" role="status"
+                                  aria-hidden="true"></span>
+                        <span class="btn-text">Submit</span>
+                    </button>
+                    <a th:href="@{/}" class="with-spinner btn btn-primary">
+                        <span class="link-text">Home</span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+                    </a>
                 </form>
-
             </div>
         </div>
     </div>
