@@ -5,6 +5,7 @@ import com.dhanmandal.dto.Receipt;
 import com.dhanmandal.entity.Collections;
 import com.dhanmandal.repository.CollectionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class CollectionsService {
     }
 
     public List<Receipt> getCollections(){
-        List<Collections> collections = collectionsRepository.findAll();
+        List<Collections> collections = collectionsRepository.findAll(Sort.by(Sort.Direction.DESC, "collectionDate"));
         return collections.stream().map(Receipt::from).collect(Collectors.toList());
     }
 
@@ -34,5 +35,10 @@ public class CollectionsService {
 
     public void deleteById(String id) {
         collectionsRepository.deleteById(id);
+    }
+
+    public List<Receipt> searchByName(String name){
+        List<Collections> collections = collectionsRepository.findByNameContainingIgnoreCase(name);
+        return collections.stream().map(Receipt::from).collect(Collectors.toList());
     }
 }

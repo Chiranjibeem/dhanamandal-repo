@@ -60,4 +60,12 @@ public class CollectionController {
         collectionsService.deleteById(id);
         return "redirect:/";
     }
+
+    @GetMapping("/collections/search")
+    public String searchByName(@ModelAttribute("keyword") String keyword, Model model) {
+        List<Receipt> receipts = collectionsService.searchByName(keyword);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("collections", receipts);
+        return "collection";
+    }
 }
