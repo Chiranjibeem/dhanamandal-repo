@@ -52,9 +52,12 @@
                         <th>Transaction Type</th>
                         <th>Collection Date</th>
                         <th>Collected By</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="">
                     <tr th:each="collection : ${collections}">
                         <td th:text="${collection.receiptId}"></td>
                         <td th:text="${collection.name}"></td>
@@ -62,6 +65,18 @@
                         <td th:text="${collection.transactionType}"></td>
                         <td th:text="${collection.collectionDate}"></td>
                         <td th:text="${collection.collectedBy}"></td>
+                        <td>
+                            <a th:href="@{/collections/edit/{id}(id=${collection.receiptId})}"
+                               class="btn btn-sm btn-warning">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/collections/delete/{id}(id=${collection.receiptId})}"
+                               class="btn btn-sm btn-warning">Delete</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/collections/print/{id}(id=${collection.receiptId})}"
+                               class="btn btn-sm btn-warning">Print</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -71,7 +86,7 @@
         <!-- Collections Form -->
         <div class="tab-pane fade" id="collections" role="tabpanel">
             <div class="form-section">
-                <form action="/collection" method="post">
+                <form action="/collections/collection" method="post">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input name ="name" type="text" class="form-control" id="name" placeholder="Enter name" required>

@@ -1,5 +1,6 @@
 package com.dhanmandal.service;
 
+import com.dhanmandal.dto.Collection;
 import com.dhanmandal.dto.Receipt;
 import com.dhanmandal.entity.Collections;
 import com.dhanmandal.repository.CollectionsRepository;
@@ -26,4 +27,12 @@ public class CollectionsService {
         return collections.stream().map(Receipt::from).collect(Collectors.toList());
     }
 
+    public Receipt findById(String id) {
+        Collections collections = collectionsRepository.findById(id).get();
+        return Receipt.from(collections);
+    }
+
+    public void deleteById(String id) {
+        collectionsRepository.deleteById(id);
+    }
 }

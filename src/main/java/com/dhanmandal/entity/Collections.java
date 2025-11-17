@@ -33,6 +33,7 @@ public class Collections {
 
     public static Collections from(Receipt receipt) {
         return Collections.builder()
+                .id(receipt.getReceiptId())
                 .name(receipt.getName())
                 .amount(receipt.getAmount())
                 .collectedBy(receipt.getCollectedBy())

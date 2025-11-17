@@ -2,10 +2,19 @@ package com.dhanmandal.dto;
 
 public class Collection {
 
-    public String name;
-    public Double amount;
-    public String transactionType;
-    public String collectedBy;
+    private String receiptId;
+    private String name;
+    private Double amount;
+    private String transactionType;
+    private String collectedBy;
+
+    public String getReceiptId() {
+        return receiptId;
+    }
+
+    public void setReceiptId(String receiptId) {
+        this.receiptId = receiptId;
+    }
 
     public String getName() {
         return name;
