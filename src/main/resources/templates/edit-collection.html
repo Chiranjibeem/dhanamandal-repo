@@ -72,6 +72,16 @@
                     type="button" role="tab">Collections
             </button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ereport-tab" data-bs-toggle="tab" data-bs-target="#ereport" type="button"
+                    role="tab">Expenditures Report
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ecollections-tab" data-bs-toggle="tab" data-bs-target="#ecollections"
+                    type="button" role="tab">Expenditures
+            </button>
+        </li>
     </ul>
     <div class="tab-content mt-3" id="collectionsTabContent">
 
@@ -113,7 +123,7 @@
                                   aria-hidden="true"></span>
                         <span class="btn-text">Submit</span>
                     </button>
-                    <a th:href="@{/}" class="with-spinner btn btn-primary">
+                    <a th:href="@{/collections}" class="with-spinner btn btn-primary">
                         <span class="link-text">Home</span>
                         <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                     </a>

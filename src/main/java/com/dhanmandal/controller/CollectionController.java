@@ -1,8 +1,10 @@
 package com.dhanmandal.controller;
 
 import com.dhanmandal.dto.Collection;
+import com.dhanmandal.dto.Payment;
 import com.dhanmandal.dto.Receipt;
 import com.dhanmandal.service.CollectionsService;
+import com.dhanmandal.service.ExpendituresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ public class CollectionController {
 
     @Autowired
     private CollectionsService collectionsService;
+
+    @Autowired
+    private ExpendituresService expendituresService;
 
     @GetMapping("/collections/status")
     public String checkStatus() {
@@ -31,12 +36,14 @@ public class CollectionController {
                 .transactionType(collection.getTransactionType())
                 .build());
         model.addAttribute("collection", newReceipt);
-        return "redirect:/";
+        return "redirect:/collections";
     }
 
-    @GetMapping
+    @GetMapping("/collections")
     public String getAllCollections(Model model) {
         List<Receipt> receipts = collectionsService.getCollections();
+        List<Payment> payments = expendituresService.getPayments();
+        model.addAttribute("expenditures", payments);
         model.addAttribute("collections", receipts);
         return "collection";
     }
@@ -58,7 +65,7 @@ public class CollectionController {
     @GetMapping("/collections/delete/{id}")
     public String deleteCollection(@PathVariable String id, Model model) {
         collectionsService.deleteById(id);
-        return "redirect:/";
+        return "redirect:/collections";
     }
 
     @GetMapping("/collections/search")
