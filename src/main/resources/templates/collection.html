@@ -133,7 +133,7 @@ margin-top: 2px;
             <div class="col-md-4 col-sm-4">
                 <div class="card-metric card-metric-sm text-center">
                     <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
+                        <i class="bi bi-wallet-fill"></i>
                     </div>
                     <div class="metric-label">Collection</div>
                     <div class="metric-value" th:text="${totalCollections}"></div>
@@ -142,27 +142,7 @@ margin-top: 2px;
             <div class="col-md-4 col-sm-4">
                 <div class="card-metric card-metric-sm text-center">
                     <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
-                    </div>
-                    <div class="metric-label">Offline Collection</div>
-                    <div class="metric-value" th:text="${totalOfflineCollections}"></div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="card-metric card-metric-sm text-center">
-                    <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
-                    </div>
-                    <div class="metric-label">Online Collection</div>
-                    <div class="metric-value" th:text="${totalOnlineCollections}"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4 col-sm-4">
-                <div class="card-metric card-metric-sm text-center">
-                    <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
+                        <i class="bi bi-cash-coin"></i>
                     </div>
                     <div class="metric-label">Expenditure</div>
                     <div class="metric-value" th:text="${totalExpenditures}"></div>
@@ -171,48 +151,10 @@ margin-top: 2px;
             <div class="col-md-4 col-sm-4">
                 <div class="card-metric card-metric-sm text-center">
                     <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
+                        <i class="bi bi-bank"></i>
                     </div>
-                    <div class="metric-label">Offline Expenditure</div>
-                    <div class="metric-value" th:text="${totalOfflineExpenditures}"></div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="card-metric card-metric-sm text-center">
-                    <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
-                    </div>
-                    <div class="metric-label">Online Expenditure</div>
-                    <div class="metric-value" th:text="${totalOnlineExpenditures}"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4 col-sm-4">
-                <div class="card-metric card-metric-sm text-center">
-                    <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
-                    </div>
-                    <div class="metric-label">Remaining Balance</div>
+                    <div class="metric-label">Balance</div>
                     <div class="metric-value" th:text="${totalRemaining}"></div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="card-metric card-metric-sm text-center">
-                    <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
-                    </div>
-                    <div class="metric-label">Remaining Offline Balance</div>
-                    <div class="metric-value" th:text="${totalOfflineRemaining}"></div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="card-metric card-metric-sm text-center">
-                    <div class="card-icon bg-green" aria-hidden="true">
-                        <i class="bi bi-credit-card-fill"></i>
-                    </div>
-                    <div class="metric-label">Remaining Online Balance</div>
-                    <div class="metric-value" th:text="${totalOnlineRemaining}"></div>
                 </div>
             </div>
         </div>
