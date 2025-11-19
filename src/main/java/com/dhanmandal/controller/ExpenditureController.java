@@ -44,10 +44,45 @@ public class ExpenditureController {
 
     @GetMapping("/expenditures")
     public String getAllPayments(Model model) {
+        double totalCollections = 0;
+        double totalOfflineCollections = 0;
+        double totalOnlineCollections = 0;
+
+        double totalExpenditures = 0;
+        double totalOfflineExpenditures = 0;
+        double totalOnlineExpenditures = 0;
+
         List<Payment> payments = expendituresService.getPayments();
         List<Receipt> receipts = collectionsService.getCollections();
         model.addAttribute("collections", receipts);
         model.addAttribute("expenditures", payments);
+
+        if(receipts != null && !receipts.isEmpty()) {
+            totalCollections = receipts.stream().mapToDouble(Receipt::getAmount).sum();
+            totalOfflineCollections = receipts.stream().filter(i -> i.getTransactionType().equalsIgnoreCase("offline"))
+                    .mapToDouble(Receipt::getAmount).sum();
+            totalOnlineCollections = receipts.stream().filter(i -> i.getTransactionType().equalsIgnoreCase("online"))
+                    .mapToDouble(Receipt::getAmount).sum();
+        }
+        model.addAttribute("totalOfflineCollections", totalOfflineCollections);
+        model.addAttribute("totalOnlineCollections", totalOnlineCollections);
+        model.addAttribute("totalCollections", totalCollections);
+
+        if(payments != null && !payments.isEmpty()) {
+            totalExpenditures = payments.stream().mapToDouble(Payment::getEamount).sum();
+            totalOfflineExpenditures = payments.stream().filter(i -> i.getEtransactionType().equalsIgnoreCase("offline"))
+                    .mapToDouble(Payment::getEamount).sum();
+            totalOnlineExpenditures = payments.stream().filter(i -> i.getEtransactionType().equalsIgnoreCase("online"))
+                    .mapToDouble(Payment::getEamount).sum();
+        }
+        model.addAttribute("totalExpenditures", totalExpenditures);
+        model.addAttribute("totalOfflineExpenditures", totalOfflineExpenditures);
+        model.addAttribute("totalOnlineExpenditures", totalOnlineExpenditures);
+
+        model.addAttribute("totalRemaining", totalCollections - totalExpenditures);
+        model.addAttribute("totalOfflineRemaining", totalOfflineCollections - totalOfflineExpenditures);
+        model.addAttribute("totalOnlineRemaining", totalOnlineCollections - totalOnlineExpenditures);
+
         return "expenditure";
     }
 
@@ -74,6 +109,45 @@ public class ExpenditureController {
     @GetMapping("/expenditures/search")
     public String searchByName(@ModelAttribute("ekeyword") String keyword, Model model) {
         List<Payment> payments = expendituresService.searchByDescriptions(keyword);
+
+        double totalCollections = 0;
+        double totalOfflineCollections = 0;
+        double totalOnlineCollections = 0;
+
+        double totalExpenditures = 0;
+        double totalOfflineExpenditures = 0;
+        double totalOnlineExpenditures = 0;
+
+        List<Receipt> receipts = collectionsService.getCollections();
+        model.addAttribute("collections", receipts);
+
+        if(receipts != null && !receipts.isEmpty()) {
+            totalCollections = receipts.stream().mapToDouble(Receipt::getAmount).sum();
+            totalOfflineCollections = receipts.stream().filter(i -> i.getTransactionType().equalsIgnoreCase("offline"))
+                    .mapToDouble(Receipt::getAmount).sum();
+            totalOnlineCollections = receipts.stream().filter(i -> i.getTransactionType().equalsIgnoreCase("online"))
+                    .mapToDouble(Receipt::getAmount).sum();
+        }
+        model.addAttribute("totalOfflineCollections", totalOfflineCollections);
+        model.addAttribute("totalOnlineCollections", totalOnlineCollections);
+        model.addAttribute("totalCollections", totalCollections);
+
+        if(payments != null && !payments.isEmpty()) {
+            totalExpenditures = payments.stream().mapToDouble(Payment::getEamount).sum();
+            totalOfflineExpenditures = payments.stream().filter(i -> i.getEtransactionType().equalsIgnoreCase("offline"))
+                    .mapToDouble(Payment::getEamount).sum();
+            totalOnlineExpenditures = payments.stream().filter(i -> i.getEtransactionType().equalsIgnoreCase("online"))
+                    .mapToDouble(Payment::getEamount).sum();
+        }
+        model.addAttribute("totalExpenditures", totalExpenditures);
+        model.addAttribute("totalOfflineExpenditures", totalOfflineExpenditures);
+        model.addAttribute("totalOnlineExpenditures", totalOnlineExpenditures);
+
+        model.addAttribute("totalRemaining", totalCollections - totalExpenditures);
+        model.addAttribute("totalOfflineRemaining", totalOfflineCollections - totalOfflineExpenditures);
+        model.addAttribute("totalOnlineRemaining", totalOnlineCollections - totalOnlineExpenditures);
+
+
         model.addAttribute("ekeyword", keyword);
         model.addAttribute("expenditures", payments);
         return "expenditure";
