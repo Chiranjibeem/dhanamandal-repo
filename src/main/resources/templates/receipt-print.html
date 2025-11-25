@@ -24,6 +24,17 @@
         });
     });
 </script>
+<script>
+    function printPage() {
+      const btn = document.getElementById("printBtn");
+      const home = document.getElementById("homeLink");
+      home.style.display = "none"; // hide home link before print
+      btn.style.display = "none";   // hide before print
+      window.print();
+      btn.style.display = "inline-block"; // show again after print
+      home.style.display = "inline-block"; // show home link again after print
+    }
+</script>
 <div class="container mt-5">
     <h2 class="text-center">Receipt</h2>
     <hr/>
@@ -36,11 +47,11 @@
     <p><strong>Collected By:</strong> <span th:text="${collection.collectedBy}"></span></p>
 
     <div class="mt-4 d-flex justify-content-between">
-        <a th:href="@{/collections}" class="with-spinner btn btn-primary">
+        <a th:href="@{/collections}" class="with-spinner btn btn-primary" id="homeLink">
             <span class="link-text">Home</span>
             <span class="spinner-border spinner-border-sm d-none" role="status"></span>
         </a>
-        <button onclick="window.print()" class="btn btn-info">Print</button>
+        <button onclick="printPage()" class="btn btn-info" id="printBtn">Print</button>
     </div>
 </div>
 </body>
