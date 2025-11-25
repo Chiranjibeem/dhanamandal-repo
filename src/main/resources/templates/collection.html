@@ -116,9 +116,33 @@ margin-top: 2px;
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll("a.with-spinner").forEach(anchor => {
-            anchor.addEventListener("click", function() {
+            anchor.addEventListener("click", function(e) {
                 const spinner = this.querySelector(".spinner-border");
                 const text = this.querySelector(".link-text");
+                const label = text ? text.innerText.trim() : "";
+
+                // If this is a delete link (uses confirm), handle confirm first.
+                if (label === "Delete" || (this.getAttribute && /confirmDelete/.test(this.getAttribute('onclick') || ''))) {
+                    e.preventDefault(); // stop default navigation/inline onclick for now
+
+                    // Use existing confirmDelete() if available, fallback to native confirm
+                    const confirmed = (typeof window.confirmDelete === 'function')
+                        ? window.confirmDelete()
+                        : confirm('Are you sure you want to delete?');
+
+                    if (confirmed) {
+                        if (spinner) spinner.classList.remove("d-none");
+                        if (text) text.classList.add("d-none");
+                        this.style.pointerEvents = "none";
+                        // proceed to the href
+                        window.location.href = this.href;
+                    } else {
+                        // user cancelled — do nothing (no spinner)
+                    }
+                    return;
+                }
+
+                // Non-delete links: show spinner immediately
                 if (spinner) spinner.classList.remove("d-none");
                 if (text) text.classList.add("d-none");
                 this.style.pointerEvents = "none";
@@ -233,7 +257,7 @@ margin-top: 2px;
                         </td>
                         <td>
                             <a th:href="@{/collections/delete/{id}(id=${collection.receiptId})}" class="with-spinner btn btn-sm btn-danger"
-                                onclick="alert('Are you sure, you want to delete ?');">
+                                onclick="return confirmDelete();">
                                 <span class="link-text">Delete</span>
                                 <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                             </a>
@@ -334,7 +358,7 @@ margin-top: 2px;
                         </td>
                         <td>
                             <a th:href="@{/expenditures/delete/{id}(id=${expenditure.paymentId})}" class="with-spinner btn btn-sm btn-danger"
-                               onclick="alert('Are you sure, you want to delete ?');">
+                               onclick="return confirmDelete();">
                                 <span class="link-text">Delete</span>
                                 <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                             </a>
