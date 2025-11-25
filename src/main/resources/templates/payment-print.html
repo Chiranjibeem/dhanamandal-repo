@@ -10,6 +10,14 @@
           margin-left: 5px;
         }
 </style>
+<style>
+    /* Hide elements during actual printing */
+    @media print {
+      .no-print { display: none !important; }
+    }
+    /* Utility to hide briefly on screen while preparing print (optional) */
+    .no-print.temp-hide { visibility: hidden !important; }
+</style>
 <body>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -26,13 +34,28 @@
 </script>
 <script>
     function printPage() {
-      const btn = document.getElementById("printBtn");
-      const home = document.getElementById("homeLink");
-      home.style.display = "none"; // hide home link before print
-      btn.style.display = "none";   // hide before print
-      window.print();
-      btn.style.display = "inline-block"; // show again after print
-      home.style.display = "inline-block"; // show home link again after print
+      if (typeof window.print !== 'function') {
+        // no print support
+        return;
+      }
+
+      const btn = document.getElementById('printBtn');
+      const home = document.getElementById('homeLink');
+
+      // Defensive checks
+      if (btn) btn.classList.add('no-print', 'temp-hide');
+      if (home) home.classList.add('no-print', 'temp-hide');
+
+      // Give the browser a moment to apply the class/repaint before printing
+      setTimeout(() => {
+        window.print();
+
+        // Remove temp-hide after print dialog starts; keep no-print only for print media
+        setTimeout(() => {
+          if (btn) btn.classList.remove('temp-hide');
+          if (home) home.classList.remove('temp-hide');
+        }, 300);
+      }, 80);
     }
 </script>
 <div class="container mt-5">
