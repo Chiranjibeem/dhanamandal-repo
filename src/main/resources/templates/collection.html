@@ -232,7 +232,8 @@ margin-top: 2px;
                             </a>
                         </td>
                         <td>
-                            <a th:href="@{/collections/delete/{id}(id=${collection.receiptId})}" class="with-spinner btn btn-sm btn-danger">
+                            <a th:href="@{/collections/delete/{id}(id=${collection.receiptId})}" class="with-spinner btn btn-sm btn-danger"
+                                onclick="alert('Are you sure, you want to delete ?');">
                                 <span class="link-text">Delete</span>
                                 <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                             </a>
@@ -332,7 +333,8 @@ margin-top: 2px;
                             </a>
                         </td>
                         <td>
-                            <a th:href="@{/expenditures/delete/{id}(id=${expenditure.paymentId})}" class="with-spinner btn btn-sm btn-danger">
+                            <a th:href="@{/expenditures/delete/{id}(id=${expenditure.paymentId})}" class="with-spinner btn btn-sm btn-danger"
+                               onclick="alert('Are you sure, you want to delete ?');">
                                 <span class="link-text">Delete</span>
                                 <span class="spinner-border spinner-border-sm d-none" role="status"></span>
                             </a>
