@@ -62,7 +62,7 @@
 </script>
 <div class="container mt-5">
     <ul class="nav nav-tabs" id="collectionsTab" role="tablist">
-        <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation" th:if="${!editing}">
             <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button"
                     role="tab">Collections Report
             </button>
@@ -72,12 +72,12 @@
                     type="button" role="tab">Collections
             </button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation" th:if="${!editing}">
             <button class="nav-link" id="ereport-tab" data-bs-toggle="tab" data-bs-target="#ereport" type="button"
                     role="tab">Expenditures Report
             </button>
         </li>
-        <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation" th:if="${!editing}">
             <button class="nav-link" id="ecollections-tab" data-bs-toggle="tab" data-bs-target="#ecollections"
                     type="button" role="tab">Expenditures
             </button>

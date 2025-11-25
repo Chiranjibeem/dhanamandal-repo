@@ -68,6 +68,7 @@ public class ExpenditureController {
     @GetMapping("/expenditures/edit/{id}")
     public String editPayment(@PathVariable String id, Model model) {
         Payment payment = expendituresService.findById(id);
+        model.addAttribute("editing", true);
         model.addAttribute("expenditure", payment);
         return "edit-expenditure";
     }

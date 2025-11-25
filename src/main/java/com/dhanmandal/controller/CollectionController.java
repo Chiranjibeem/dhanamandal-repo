@@ -66,6 +66,7 @@ public class CollectionController {
     @GetMapping("/collections/edit/{id}")
     public String editCollection(@PathVariable String id, Model model) {
         Receipt receipt = collectionsService.findById(id);
+        model.addAttribute("editing", true);
         model.addAttribute("collection", receipt);
         return "edit-collection";
     }
