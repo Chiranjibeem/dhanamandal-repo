@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DhanmandalApplication {
 
     public static void main(String[] args) {
+        
         SpringApplication.run(DhanmandalApplication.class, args);
     }
 
